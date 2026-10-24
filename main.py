@@ -2,7 +2,7 @@
 # Author:          Sam M, Jake N
 # Assignment:      lab5
 # Date:            10/23/2026
-# Description:     Prompts the user for a value to convert from imperial to metric
+# Description:     Prompts the user to create a list of movies
 # Input:           Movies
 # Output:          Outputs selection menu, Editable items, terminal display of full list on exit, human response to
 #invalid input
@@ -15,7 +15,8 @@ movies = []
 
 # Function to display the available options
 def display_menu():
-    print("\n1. Add Movie")
+    print("Let's create a favorite movie list!")
+    print("1. Add Movie")
     print("2. Edit Movie")
     print("3. Delete Movie")
     print("4. Exit")
