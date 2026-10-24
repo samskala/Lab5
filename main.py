@@ -12,15 +12,30 @@ from os import get_terminal_size
 from menu import display_list, display_banner
 # from movie_func import add_movie, edit_movie
 
+# Example definition that would be imported
+# Initialize an empty list to store movie
+movies = []
+
+def add_movie():
+    run = "y"
+    while run.lower() == "y":
+        width, height = get_terminal_size()
+        banner_height = display_banner("Add a Movie", width, show_datetime=False)
+        display_list(movies, width, height, banner_height, center_lines=False)
+        # Prompt the user to enter a movie
+        movie = input("Enter movie title: ")
+        # Add the movie to the list
+        movies.append(movie)
+        print("Movie title added successfully.")
+        run = input("Add another? (y/N): ")
+
 # Menu Options; the name of the function to display and the app executable
 MENU_OPTIONS = [
-    {"name":"Add Movie"},#,"app": add_movie},
+    {"name":"Add Movie","app": add_movie},
     {"name":"Edit Movie"},#,"app": edit_movie},
     {"name":"Delete Movie"},#,"app": delete_movie},
     {"name":"Exit"} # Always last
 ]
-# Initialize an empty list to store movie
-#movies = []
 
 
 def main():
@@ -47,13 +62,7 @@ def main():
         print("")
 
 main()
-    # Option 1: Add movie
-#    if choice == '1':
-        # Prompt the user to enter a movie
-#        movie = input("Enter movie title: ")
-        # Add the movie to the list
-#        movies.append(movie)
-#        print("Movie title added successfully.")
+
 
     # Option 2: Edit movie
 #    elif choice == '2':

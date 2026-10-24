@@ -70,7 +70,10 @@ def display_list(options, width, height, banner = 0, fill_screen = True,
 
     for i in range(0, len(options)):
         # Initialize
-        name = options[i]["name"]
+        if type(options[i]) == dict:
+            name = options[i]["name"]
+        else:
+            name = options[i]
         first = True
         # Determine if option name is larger than width and break it into
         #  sections before displaying the rest
