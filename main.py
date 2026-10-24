@@ -12,30 +12,15 @@ from os import get_terminal_size
 from menu import display_list, display_banner
 # from movie_func import add_movie, edit_movie
 
-# Example definition that would be imported
-# Initialize an empty list to store movie
-movies = []
-
-def add_movie():
-    run = "y"
-    while run.lower() == "y":
-        width, height = get_terminal_size()
-        banner_height = display_banner("Add a Movie", width, show_datetime=False)
-        display_list(movies, width, height, banner_height, center_lines=False)
-        # Prompt the user to enter a movie
-        movie = input("Enter movie title: ")
-        # Add the movie to the list
-        movies.append(movie)
-        print("Movie title added successfully.")
-        run = input("Add another? (y/N): ")
-
 # Menu Options; the name of the function to display and the app executable
 MENU_OPTIONS = [
-    {"name":"Add Movie","app": add_movie},
+    {"name":"Add Movie"},#,"app": add_movie},
     {"name":"Edit Movie"},#,"app": edit_movie},
     {"name":"Delete Movie"},#,"app": delete_movie},
     {"name":"Exit"} # Always last
 ]
+# Initialize an empty list to store movie
+movies = []
 
 
 def main():
@@ -61,64 +46,70 @@ def main():
                 MENU_OPTIONS[int(choice) - 1]["app"]()
         print("")
 
-main()
-
+    main()
+    # Option 1: Add movie
+    if choice == '1':
+        # Prompt the user to enter a movie
+        movie = input("Enter movie title: ")
+        # Add the movie to the list
+        movies.append(movie)
+        print("Movie title added successfully.")
 
     # Option 2: Edit movie
-#    elif choice == '2':
+    elif choice == '2':
         # Check if there are movies available to edit
-#        if movies:
+        if movies:
             # Display the current movie with their indices
-#            for index, movie in enumerate(movies):
-#                print(f"{index + 1}. {movie}")
+            for index, movie in enumerate(movies):
+                print(f"{index + 1}. {movie}")
             # Prompt the user to enter the index of the movie to edit
-#            try:
-#                movie_index = int(input("Enter movie index to edit: ")) - 1
+            try:
+                movie_index = int(input("Enter movie index to edit: ")) - 1
                 # Check if the entered index is valid
-#                if 0 <= movie_index < len(movie):
+                if 0 <= movie_index < len(movie):
                     # Prompt the user to enter a new movie
-#                    new_movie = input("Enter a new movie: ")
+                    new_movie = input("Enter a new movie: ")
                     # Update the movie at the specified index
-#                    movies[movie_index] = new_movie
-#                    print("Movie edited successfully.")
-#                else:
-#                    print("Invalid index.")
-#            except ValueError:
-#                print("Please enter a valid number.")
-#        else:
-#            print("No movies available to edit.")
+                    movies[movie_index] = new_movie
+                    print("Movie edited successfully.")
+                else:
+                    print("Invalid index.")
+            except ValueError:
+                print("Please enter a valid number.")
+        else:
+            print("No movies available to edit.")
 
     # Option 3: Delete movie
-#    elif choice == '3':
+    elif choice == '3':
         # Check if there are movie available to delete
-#        if movie:
+       if movies:
             # Display the current movie with their indices
-#            for index, movie in enumerate(movies):
-#                print(f"{index + 1}. {movie}")
+            for index, movie in enumerate(movies):
+                print(f"{index + 1}. {movie}")
             # Prompt the user to enter the index of the movie to delete
-#            try:
-#                movie_index = int(input("Enter movie index to delete: ")) - 1
+            try:
+                movie_index = int(input("Enter movie index to delete: ")) - 1
                 # Check if the entered index is valid
-#                if 0 <= movie_index < len(movies):
+                if 0 <= movie_index < len(movies):
                     # Remove the movie at the specified index
-#                    movies.pop(movie_index)
-#                    print("Movie deleted successfully.")
-#                else:
-#                    print("Invalid index.")
-#            except ValueError:
-#                print("Please enter a valid number.")
-#        else:
-#            print("No movies available to delete.")
+                    movies.pop(movie_index)
+                    print("Movie deleted successfully.")
+                else:
+                    print("Invalid index.")
+            except ValueError:
+                print("Please enter a valid number.")
+       else:
+            print("No movies available to delete.")
 
     # Option 4: Exit
-#    elif choice == '4':
+    elif choice == '4':
         # Exit the application
-#        print("Exiting the application. Goodbye!")
-#        for index, movie in enumerate(movies):
-#            print(f"{index + 1}. {movie}")
-#        break
+        print("Exiting the application. Goodbye!")
+        for index, movie in enumerate(movies):
+            print(f"{index + 1}. {movie}")
+            break
 
     # Handle invalid menu choices
-#    else:
-#        print("Invalid choice. Please select a valid option.")
+    else:
+        print("Invalid choice. Please select a valid option.")
 
