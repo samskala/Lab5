@@ -24,11 +24,11 @@ MENU_OPTIONS = [
 
 
 def main():
-    # Get size of the terminal window
-    width, height = get_terminal_size()
     # Start a loop to continuously interact with the user
     choice = 0
     while choice != str(len(MENU_OPTIONS)):
+        # Get size of the terminal window
+        width, height = get_terminal_size()
         # Display the menu options
         banner_height = display_banner("Let's create a favorite movie list!",
             width, show_datetime=False)
