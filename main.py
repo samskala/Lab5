@@ -32,7 +32,7 @@ def main():
         # Display the menu options
         banner_height = display_banner("Let's create a favorite movie list!",
             width, show_datetime=False)
-        display_list(MENU_OPTIONS, width, height, banner_height)
+        display_list(MENU_OPTIONS, width, height, banner_height, center_lines=False)
 
         # Get the user's choice
         choice = input("Select an option: ")
