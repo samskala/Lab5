@@ -3,21 +3,12 @@
 # Lab:             CIS-133Y Lab5
 # Date:            10/23/2026
 # Description:     Functions for displaying clean menu options
-# Input:           string: selected, integer: selected
+# Input:           
 # Output:          Top of screen banner and a dynamic menu for displaying
 #                  each available option.
 # Sources:         
 #*****************************************************************************
 from datetime import datetime
-
-
-OPTIONS = [
-    #{"name":"Add Numbers","app":addition},
-    #{"name":"Subtract Numbers","app":subtraction},
-    #{"name":"Multiply Numbers","app":multiplication},
-    #{"name":"Divide Numbers","app":division},
-]
-
 
 # Formats a string with whitespace on either side of it to size of the
 # width minus 2. Example:
@@ -40,12 +31,12 @@ def center_format_string(width, string):
 # the string to the size of the width minus 4. Example:
 #"1) Function One                                                          "
 # - Josh Meyer
-def display_left_formatted_string(width, string):
+def left_formatted_string(width, string):
     # Calculate the remaining white space
     whitespace = (width - len(string) - 4)
     # Display the formatted
-    print("* {string}{whitespace} *".format(string = string,\
-        whitespace = (" " * whitespace)))
+    return " {string}{whitespace} ".format(string = string,\
+        whitespace = (" " * whitespace))
 
 
 # Display a menu with padding from the top to fill the screen. Example:
@@ -55,7 +46,8 @@ def display_left_formatted_string(width, string):
 #* 3) Item Three                                                             *
 #*****************************************************************************
 # - Josh Meyer
-def display_list(options, width, height, banner = 0, fill_screen = True):
+def display_list(options, width, height, banner = 0, fill_screen = True,
+    center_lines = True):
     if fill_screen:
         # If fill the screen is selected determine the number of extra lines
         #  needed, subtracting an extra 2 for the bottom border and
@@ -66,10 +58,63 @@ def display_list(options, width, height, banner = 0, fill_screen = True):
             # For each extra line, print a bordered blank line
             print("*{spacing}*".format(spacing = (" " * (width - 2))))
 
+    # Initialize max_width with 4 for the '*'s and spaces on both ends and
+    #  another 2 for digit and ')' before the text
+    max_width = width - 6 
+    if len(options) > 9:
+        # Getting into double digit numbers, add an extra space of padding
+        max_width -= 1
+    if len(options) > 99:
+        # Why are we crossing into triple digits?
+        max_width -= 1
+
     for i in range(0, len(options)):
-        # Set the number for selection and the name of the function
-        display_left_formatted_string(width,"{num}) {name}".format(\
-            num = i + 1, name = options[i]["name"]))
+        # Initialize
+        name = options[i]["name"]
+        first = True
+        # Determine if option name is larger than width and break it into
+        #  sections before displaying the rest
+        while len(name) > max_width:
+            subtext = break_text(name, max_width)
+            if first:
+                # If this is the first line, display the number for selection
+                subtext = "{num}) {text}".format(num = i + 1, text = subtext)
+            else:
+                # Not being the first line, add some extra padding to align
+                whitespace = width - max_width + 4
+                subtext = "{whitespace}{text}".format(whitespace = \
+                    (" " * whitespace), text = subtext)
+            if center_lines:
+                # Print "*" on either side of the subtext while centering it
+                #  with whitespace.
+                display_string = center_format_string(width, subtext)
+            else:
+                # Print "*" on either side of the subtext while left adjusting
+                #  it with whitespace.
+                display_string = left_formatted_string(width, subtext)
+            print("*{string}*".format(string = display_string))
+            # Update the name variable to remove already displayed portions
+            name = name[len(subtext):]
+            first = False
+        # Either the name is not longer than the max_width or it has been 
+        #  reduced enough to display the last line
+        if first:
+            # If this is the first line, display the number for selection
+            text = "{num}) {text}".format(num = i + 1, text = name)
+        else:
+            # Not being the first line, add some extra padding to align
+            whitespace = width - max_width + 4
+            text = "{whitespace}{text}".format(whitespace = \
+                (" " * whitespace), text = name)
+        if center_lines:
+            # Print "*" on either side of the subtext while centering it
+            #  with whitespace.
+            display_string = center_format_string(width, text)
+        else:
+            # Print "*" on either side of the subtext while left adjusting
+            #  it with whitespace.
+            display_string = left_formatted_string(width, text)
+        print("*{string}*".format(string = display_string))
         
     # Print the bottom border
     print("*" * (width))
@@ -106,7 +151,7 @@ def display_banner(title, width, show_datetime = True, center_lines = True):
     # Print top border
     print("*" * (width))
     # Determine if title is larger than width and break it into sections
-    #  before truncating the rest
+    #  before diplaying the rest
     while len(title) > max_title_width:
         subtext = break_text(title, max_title_width)
         if center_lines:
@@ -116,7 +161,7 @@ def display_banner(title, width, show_datetime = True, center_lines = True):
         else:
             # Print "*" on either side of the subtext while left adjusting it
             #  with whitespace.
-            display_string = display_left_formatted_string(width, subtext)
+            display_string = left_formatted_string(width, subtext)
         print("*{string}*".format(string = display_string))
         # Update the title variable to remove already displayed portions
         title = title[len(subtext):]
@@ -130,7 +175,7 @@ def display_banner(title, width, show_datetime = True, center_lines = True):
     else:
         # Print "*" on either side of the title while left adjusting it
         #  with whitespace.
-        display_string = display_left_formatted_string(width, title)
+        display_string = left_formatted_string(width, title)
     print("*{string}*".format(string = display_string))
 
     if show_datetime:
