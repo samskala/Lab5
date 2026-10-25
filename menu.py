@@ -59,8 +59,8 @@ def display_list(options, width, height, banner = 0, fill_screen = True,
             print("*{spacing}*".format(spacing = (" " * (width - 2))))
 
     # Initialize max_width with 4 for the '*'s and spaces on both ends and
-    #  another 2 for digit and ')' before the text
-    max_width = width - 6 
+    #  another 2 for digit and ')' before the text and 1 for safe measure
+    max_width = width - 7 
     if len(options) > 9:
         # Getting into double-digit numbers, add an extra space of padding
         max_width -= 1
@@ -81,20 +81,20 @@ def display_list(options, width, height, banner = 0, fill_screen = True,
             subtext = break_text(name, max_width)
             if first:
                 # If this is the first line, display the number for selection
-                subtext = "{num}) {text}".format(num = i + 1, text = subtext)
+                prepended_text = "{num}) {text}".format(num = i + 1, text = subtext)
             else:
                 # Not being the first line, add some extra padding to align
-                whitespace = width - max_width + 4
-                subtext = "{whitespace}{text}".format(whitespace = \
+                whitespace = width - (max_width + 4)
+                prepended_text = "{whitespace}{text}".format(whitespace = \
                     (" " * whitespace), text = subtext)
             if center_lines:
-                # Print "*" on either side of the subtext while centering it
+                # Print "*" on either side of the prepended_text while centering it
                 #  with whitespace.
-                display_string = center_format_string(width, subtext)
+                display_string = center_format_string(width, prepended_text)
             else:
-                # Print "*" on either side of the subtext while left adjusting
+                # Print "*" on either side of the prepended_text while left adjusting
                 #  it with whitespace.
-                display_string = left_formatted_string(width, subtext)
+                display_string = left_formatted_string(width, prepended_text)
             print("*{string}*".format(string = display_string))
             # Update the name variable to remove already displayed portions
             name = name[len(subtext):]
@@ -106,7 +106,7 @@ def display_list(options, width, height, banner = 0, fill_screen = True,
             text = "{num}) {text}".format(num = i + 1, text = name)
         else:
             # Not being the first line, add some extra padding to align
-            whitespace = width - max_width + 4
+            whitespace = width - (max_width + 4)
             text = "{whitespace}{text}".format(whitespace = \
                 (" " * whitespace), text = name)
         if center_lines:
