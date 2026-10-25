@@ -26,7 +26,10 @@ def main():
     choice = 0
     while choice != str(len(MENU_OPTIONS)):
         # Get size of the terminal window
-        width, height = get_terminal_size()
+        try:
+            width, height = get_terminal_size()
+        except:
+            width, height = 80, 24
         # Display the menu options
         banner_height = display_banner("Let's create a favorite movie list!",
             width, show_datetime=False)

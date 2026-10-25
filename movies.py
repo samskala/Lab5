@@ -16,7 +16,10 @@ movies = []
 
 # Show the list of movies
 def display_movies(title):
-    width, height = get_terminal_size()
+    try:
+        width, height = get_terminal_size()
+    except:
+        width, height = 80, 24
     banner_height = display_banner(title, width, show_datetime=False)
     display_list(movies, width, height, banner_height, center_lines=False)
 
