@@ -88,3 +88,12 @@ def delete_movie():
             input("No movies available to delete. Press enter to continue...")
             break
         run = input("Delete another? (y/n): ")
+
+def exit_movie():
+        run = "y"
+        while run.lower() == "y":
+            if movies:
+                print(movies)
+            else:
+                print("Exiting the application. Goodbye!")
+            break
