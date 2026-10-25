@@ -27,7 +27,7 @@ def center_format_string(width, string):
     return display_string
 
 
-# Formats a string with whitespace on the right side, to left justify the
+# Formats a string with whitespace on the right side, to left justify
 # the string to the size of the width minus 4. Example:
 #"1) Function One                                                          "
 # - Josh Meyer
@@ -35,7 +35,7 @@ def left_formatted_string(width, string):
     # Calculate the remaining white space
     whitespace = (width - len(string) - 4)
     # Display the formatted
-    return " {string}{whitespace} ".format(string = string,\
+    return " {string}{whitespace} ".format(string = string,
         whitespace = (" " * whitespace))
 
 
@@ -62,7 +62,7 @@ def display_list(options, width, height, banner = 0, fill_screen = True,
     #  another 2 for digit and ')' before the text
     max_width = width - 6 
     if len(options) > 9:
-        # Getting into double digit numbers, add an extra space of padding
+        # Getting into double-digit numbers, add an extra space of padding
         max_width -= 1
     if len(options) > 99:
         # Why are we crossing into triple digits?
@@ -123,7 +123,7 @@ def display_list(options, width, height, banner = 0, fill_screen = True,
     print("*" * (width))
 
 
-# Detemine the break point for a string to fit within the desired confines
+# Determine the break point for a string to fit within the desired confines
 # -Josh Meyer
 def break_text(fulltext, width):
     # Initialize which characters to attempt a break on
@@ -154,7 +154,7 @@ def display_banner(title, width, show_datetime = True, center_lines = True):
     # Print top border
     print("*" * (width))
     # Determine if title is larger than width and break it into sections
-    #  before diplaying the rest
+    #  before displaying the rest
     while len(title) > max_title_width:
         subtext = break_text(title, max_title_width)
         if center_lines:

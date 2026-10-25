@@ -30,7 +30,7 @@ def add_movie():
         # Add the movie to the list
         movies.append(movie)
         print("Movie title added successfully.")
-        run = input("Add another? (y/N): ")
+        run = input("Add another? (y/n): ")
 
 # Edit a movie in the list
 def edit_movie():
@@ -58,7 +58,7 @@ def edit_movie():
         else:
             input("No movies available to edit. Press enter to continue...")
             break
-        run = input("Edit another? (y/N): ")
+        run = input("Edit another? (y/n): ")
 
 # Delete a movie from the list
 def delete_movie():
@@ -84,4 +84,4 @@ def delete_movie():
         else:
             input("No movies available to delete. Press enter to continue...")
             break
-        run = input("Delete another? (y/N): ")
+        run = input("Delete another? (y/n): ")
